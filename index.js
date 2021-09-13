@@ -11,12 +11,13 @@
  * 
  * The following code is demonstrating a way of completing this task
  * It returns the string `foofoo`
-*/
+ */
 
 function processFirstItem(stringList, callback) {
-  return callback(stringList[0])
+    return callback(stringList[0])
 }
-console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
+console.log(processFirstItem(['foo', 'bar'],
+    function(str) { return str + str }));
 
 // ⭐️ Example Challenge END ⭐️
 
@@ -27,20 +28,20 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   
   Study the code for counter1 and counter2, then answer the questions below.
   
-  1. What is the difference between counter1 and counter2?
+  1. What is the difference between counter1 and counter2? counter1 references the counterMaker higher order function while the counter2 is a lower order function
   
-  2. Which of the two uses a closure? How can you tell?
+  2. Which of the two uses a closure? How can you tell?  Counter1 code uses closusre because the counter function which is an inner function reaches out to the outher function, counterMaker().
   
   3. In what scenario would the counter1 code be preferable? In what scenario would 
-     counter2 be better?  
+     counter2 be better? You would use Counter2 if you needed the count in other parts of the program as a global variable.    
 */
 
 // counter1 code
 function counterMaker() {
-  let count = 0;
-  return function counter() {
-   return count++;
-  }
+    let count = 0;
+    return function counter() {
+        return count++;
+    }
 }
 
 const counter1 = counterMaker();
@@ -49,7 +50,7 @@ const counter1 = counterMaker();
 let count = 0;
 
 function counter2() {
-  return count++;
+    return count++;
 }
 
 
@@ -62,10 +63,11 @@ Use the inning function below to do the following:
 NOTE: This will be a callback function for the tasks below
 */
 
-function inning(/*Code Here*/){
+function inning( /*Code Here*/ ) {
     /*Code Here*/
+    return Math.floor(Math.random() * 3);
 }
-
+console.log(inning());
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
@@ -79,21 +81,38 @@ Use the finalScore function below to do the following:
   "Home": 11,
   "Away": 5
 }
-*/ 
+*/
 
-function finalScore(/*code Here*/){
-  /*Code Here*/
+function finalScore(inningCb, innings) {
+    /*Code Here*/
+    let homeScore = 0;
+    let awayScore = 0;
+
+    for (let i = 0; i < innings; i++) {
+        homeScore = homeScore + inningCb();
+        awayScore = awayScore + inningCb();
+    }
+    return {
+        Home: homeScore,
+        Away: awayScore
+    }
 }
+console.log(finalScore(inning, 5))
+
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
+function getInningScore(inningCB) {
+    /*Your Code Here */
+    return {
+        Home: homeScore,
+        Away: awayScore
+    }
 }
-
+console.log(getInningScore(inning));
 
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
 Use the scoreboard function below to do the following:
@@ -136,26 +155,42 @@ Use the scoreboard function below to do the following:
 ]  
   */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(inningCb, getInningScoreCb, numb1) {
+    /* CODE HERE */
+    const stringArray = [];
+    let homeScore = 0;
+    let awayScore = 0;
+    for (let i = 0; i < numb1; i++) {
+        const currentInning = getInningScoreCb(inningCb);
+        homeScore = homeScore + currentInning.Home;
+        awayScore = awayScore + currentInning.Away;
+        stringArray.push(`Inning ${i+1}: Away ${currentInning.Away} - Home ${currentInning.Home}`)
+    }
+    if (homeScore === awayScore) {
+        stringArray.push(`This game will require extra innings: Away ${awayScore} - Home ${homeScore}`)
+    } else {
+        stringArray.push(`Final Score :Away ${awayScore} - Home ${homeScore}`);
+    }
+    return stringArray;
 }
+console.log(scoreboard(inning, getInningScore, 4));
 
 
 
 
 /* 🛑🛑🛑🛑🛑 Please do not modify anything below this line 🛑🛑🛑🛑🛑 */
-function foo(){
-  console.log('its working');
-  return 'bar';
+function foo() {
+    console.log('its working');
+    return 'bar';
 }
 foo();
 module.exports = {
-  foo,
-  processFirstItem,
-  counter1,
-  counter2,
-  inning,
-  finalScore,
-  getInningScore,
-  scoreboard,
+    foo,
+    processFirstItem,
+    counter1,
+    counter2,
+    inning,
+    finalScore,
+    getInningScore,
+    scoreboard,
 }
