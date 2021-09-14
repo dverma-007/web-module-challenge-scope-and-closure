@@ -58,7 +58,7 @@ You will be running your tests in one terminal and debugging in the other. As yo
 
 Edit the `ReadMe` file with your answers to the questions below.
 
-1. In your own words, define closure (1-2 sentences).
+1. In your own words, define closure (1-2 sentences).  Closure gives us the ability to put functions together.  It is code that has been identified elsewhere that can be used later.  
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -79,9 +79,9 @@ dansRoll();
 dansRoll();
 ```
 
-a. Where is closure used in this code? How can you tell?
-b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
-c. What is the lexical scope of `newRoll`? 
+a. Where is closure used in this code? How can you tell?  When the math.floor function reaches out to the personalDice function.  
+b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?  Dan is always the same.  The roll value of his die could change everytime.
+c. What is the lexical scope of `newRoll`?  I is a callback function and the higher order function is personalDice. 
 
 
 ### Task 3 - Stretch Goals
@@ -109,3 +109,4 @@ addSix(21); // returns 27
 ## Submission format
 
 Please submit your project via codegrade by following [these instructions](https://www.notion.so/lambdaschool/Submitting-an-assignment-via-Code-Grade-A-Step-by-Step-Walkthrough-07bd65f5f8364e709ecb5064735ce374)
+Just saving file 2.

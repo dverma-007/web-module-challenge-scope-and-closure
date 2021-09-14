@@ -107,6 +107,8 @@ Use the getInningScore() function below to do the following:
 
 function getInningScore(inningCB) {
     /*Your Code Here */
+    let homeScore = inningCB();
+    let awayScore = inningCB();
     return {
         Home: homeScore,
         Away: awayScore
